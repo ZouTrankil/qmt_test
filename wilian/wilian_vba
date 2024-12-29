@@ -1,0 +1,27 @@
+声明：
+INPUT:N(15,1,300,10);
+INPUT:P1(5,2,80,1);
+INPUT:P2(5,2,80,1);
+RSV:= (HHV(HIGH,N)-CLOSE)/(HHV(HIGH,N)-LLV(LOW,N))*100;
+LWR1:SMA(RSV,P1,1);
+LWR2:SMA(LWR1,P2,1);
+lwr1下破lwr2:CROSS(lwr2,lwr1);
+lwr1上穿lwr2:CROSS(lwr1,lwr2);
+lwr1_down_lwr2:CROSS(lwr2,lwr1);
+lwr1_up_lwr2:CROSS(lwr1,lwr2);
+
+P_O:OPEN;
+P_C:CLOSE;
+P_H:HIGH;
+P_L:LOW;
+
+注释：
+LWR威廉指标实际上是KD指标的补数，即(100-KD)。
+LWR1线  (100-线K)
+LWR2线  (100-线D)
+参数：N、P1、P2 天数，一般取9、3、3
+用法：
+1.LWR2<30，超买；LWR2>70，超卖。
+2.线LWR1向下穿越线LWR2，多头买进信号；
+  线LWR1向上穿越线LWR2，多头卖出信号。
+3.线LWR1与线LWR2的交叉发生在30以下，70以上，才有效。
