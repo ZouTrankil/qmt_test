@@ -12,7 +12,6 @@ import backtrader as bt
 import matplotlib.pyplot as plt
 import akshare as ak
 import numpy as np
-from markdown_it.rules_core import inline
 
 #正常显示画图时出现的中文和负号
 from pylab import mpl
