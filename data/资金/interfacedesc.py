@@ -56,7 +56,7 @@ def analyze_and_sum_net_inflow(data):
 
 # 主程序
 if __name__ == "__main__":
-    start_date = '20250201'
+    start_date = '20250214'
     end_date = '20250223'
 
     # 获取板块资金流向数据
