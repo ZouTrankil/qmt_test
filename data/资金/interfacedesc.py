@@ -54,13 +54,42 @@ def analyze_and_sum_net_inflow(data):
 
     return positive_inflow
 
+def get_stock_moneyflow(symbol, start_date, end_date):
+    # df = pro.moneyflow(ts_code=symbol, start_date=start_date, end_date=end_date)
+    df = pro.moneyflow_ths(ts_code=symbol, start_date=start_date, end_date=end_date)
+    # 计算总流入和总流出
+    # bs = df['buy_sm_amount'].sum()
+    # bm = df['buy_md_amount'].sum()
+    # bl = df['buy_lg_amount'].sum()
+    # 计算总流入和总流出
+    print(df)
+    pct_change = df['pct_change'].sum()
+    #净流入
+    total_in = df['net_amount'].sum()
+
+    # 统计整个期间的流入流出
+    # period_outflow = total_outflow.sum()
+    # net_flow = period_inflow - period_outflow
+    # 计算总流入和总流出的比例
+    # total_flow = period_inflow + period_outflow
+    # inflow_ratio = (period_inflow / total_flow) * 100
+    # outflow_ratio = (period_outflow / total_flow) * 100
+    # 打印结果
+    print(f"{symbol} {start_date} 到 {end_date}")
+    # total_in
+    print(f"流入:{total_in:.2f}")
+    print(f"up:{pct_change:.2f}%")
 # 主程序
 if __name__ == "__main__":
-    start_date = '20250214'
-    end_date = '20250223'
+    start_date = '20250225'
+    end_date = '20250227'
 
     # 获取板块资金流向数据
     data = get_industry_moneyflow(start_date, end_date)
 
     # 分析并筛选净流入总和为正数的板块
     positive_inflow_data = analyze_and_sum_net_inflow(data)
+
+    print(positive_inflow_data)
+
+    # get_stock_moneyflow("600519.sh", start_date, end_date)
