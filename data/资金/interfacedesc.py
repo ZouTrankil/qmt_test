@@ -81,8 +81,8 @@ def get_stock_moneyflow(symbol, start_date, end_date):
     print(f"up:{pct_change:.2f}%")
 # 主程序
 if __name__ == "__main__":
-    start_date = '20250225'
-    end_date = '20250227'
+    start_date = '20250305'
+    end_date = '20250306'
 
     # 获取板块资金流向数据
     data = get_industry_moneyflow(start_date, end_date)

@@ -9,6 +9,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 from data.tokendesc import token
+from data.资金.code_symbol import code_symbol
 
 # 设置 Tushare token（请替换为你的实际 token）
 ts.set_token(token)
@@ -38,6 +39,13 @@ def get_index_constituents_and_moneyflow(index_code, days=5):
     index_constituents = index_constituents[index_constituents['trade_date'] == latest_date]
     index_constituents['ts_code'] = index_constituents['con_code']
     index_constituents = index_constituents[['ts_code', 'con_code']]
+
+    # 替换A500
+    a500_constituents = pd.read_csv('a500_constituents.csv')
+    # 替换 a500_constituents 的成分券代码为 ts_code
+    a500_constituents['ts_code'] = a500_constituents['成分券代码'].apply(code_symbol)
+    a500_constituents['con_code'] = a500_constituents['成分券代码'].apply(code_symbol)
+    index_constituents = a500_constituents[['ts_code', 'con_code']]
 
     # 添加股票名称
     stock_basic = pro.stock_basic(fields='ts_code,name')
@@ -81,7 +89,7 @@ def get_index_constituents_and_moneyflow(index_code, days=5):
 if __name__ == "__main__":
     # 示例：获取沪深 300 指数成分股的资金流向
     index_code = '000300.SH'
-    days = 5
+    days = 1
     result = get_index_constituents_and_moneyflow(index_code, days)
 
     # 输出结果
