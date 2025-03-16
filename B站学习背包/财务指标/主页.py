@@ -10,6 +10,8 @@ import sqlite3
 import talib
 from datetime import datetime
 import streamlit as st
+# 设置断点
+import pdb
 
 st.set_page_config(page_title='股票财务分析系统',layout="wide")
 st.markdown("# 股票财务分析系统")
@@ -34,6 +36,7 @@ def read_price():
 @st.cache_data
 def read_xx():
     stock_hy=pd.read_csv(r'G:\fund\qmt_test\B站学习背包\财务指标\tushare_bak_basic_20250216155614.csv')
+    pdb.set_trace()
     stock_hy = stock_hy.rename(columns={'ts_code': '股票代码', 'industry': '二级行业', 'name': '股票简称'})
     stock_hy = stock_hy.sort_values(by='股票代码')
     return stock_hy[stock_hy["股票代码"]<'003000.SZ'][["股票简称","股票代码","二级行业"]]
